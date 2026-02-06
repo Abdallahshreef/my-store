@@ -1,6 +1,6 @@
 "use client"
 import { Product } from "@/fake-db/types/product"
-import { useCartStore } from "@/features/cart/cart.store"
+import { useCartStore } from "@/types/features/cart/cart.store"
 
 export default function AddToCartButton({ product }: { product: Product }) {
     const addToCart = useCartStore((state) => state.addToCart)

@@ -1,7 +1,8 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { Product } from "@/fake-db/types/product"
-import { useCartStore } from "@/features/cart/cart.store"
+import { useCartStore } from "@/types/features/cart/cart.store"
 
 interface Props {
     product: Product
@@ -9,18 +10,16 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
     const addToCart = useCartStore((state) => state.addToCart)
+    const router = useRouter()
 
     return (
-        <div className="
-      group
-      bg-white dark:bg-gray-800
-      border border-gray-200 dark:border-gray-700
-      rounded-xl p-4
-      shadow-sm hover:shadow-lg
-      transition
-    ">
+        <div onClick={() => router.push(`/shop/products/${product.id}`)} className="bg-white dark:bg-[var(--bg-socendary)] border border-gray-200 dark:border-[var(--corder-color)] rounded-xl  shadow hover:shadow-lg p-4 flex flex-col transition">
+            {/* Image */}
+            <div className="h-40 flex items-center justify-center mb-4">
+                <img src={product.image} className="max-h-full object-contain" />
+            </div>
             {/* Title */}
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 line-clamp-2">
+            <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-700 line-clamp-1">
                 {product.title}
             </h2>
 
@@ -30,19 +29,21 @@ export default function ProductCard({ product }: Props) {
             </p>
 
             {/* Button */}
-            <button
-                onClick={() => addToCart(product)}
-                className="
-          mt-4 w-full
-          bg-black dark:bg-blue-600
-          text-white
-          py-2 rounded-lg
-          hover:opacity-90
-          transition
-        "
+            < button
+                onClick={(e) => {
+                    e.stopPropagation()   // ✋ يمنع فتح صفحة التفاصيل
+                    addToCart({
+                        id,
+                        title,
+                        price,
+                        image,
+                    })
+                }}
+                className="bg-blue-600 text-white px-3 py-1 rounded"
             >
-                Add to cart
+                Add to Cart
             </button>
+
         </div>
     )
 }

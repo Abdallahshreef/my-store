@@ -19,7 +19,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen transition-colors">
+      <body className="bg-gray-50 text-black dark:bg-[var(--bg-main)] dark:text-[var(--text-main)] min-h-screen transition-colors">
         <ThemeProvider>
           <Navbar />
           <main className="max-w-7xl mx-auto px-6 py-6">

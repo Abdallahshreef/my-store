@@ -1,23 +1,50 @@
-import { getProductById } from "@/features/products/product.service";
-import { notFound } from "next/navigation";
-import AddToCartButton from "@/components/product/AddToCardButton";
+"use client"
 
-interface Props {
-    params: {
-        id: string
-    }
-}
-export default async function ProductDetailsPage({ params }: Props) {
-    const product = await getProductById(params.id)
-    if (!product) return notFound()
+import { useParams } from "next/navigation"
+import { products } from "@/fake-db/data/products"
+import { useCartStore } from "@/types/features/cart/cart.store"
+
+export default function ProductPage() {
+    const params = useParams()
+    const prod = products.find((p) => p.id === params.id)
+    const addToCart = useCartStore((state) => state.addToCart)
+
+    if (!prod) return <p className="text-center mt-10 text-xl">Product not found</p>
 
     return (
-        <div className="max-w-3xl mx-auto mt-10 space-y-4">
-            <h1 className="text-2xl font-bold">{product.title}</h1>
-            <p className="text-gray-500">{product.description}</p>
-            <p className="text-lg font-semibold">{product.price}</p>
-            <AddToCartButton product={product} />
+        <div className="max-w-4xl mx-auto p-6 flex flex-col md:flex-row gap-8">
+            {/* صورة المنتج */}
+            <div className="flex-1">
+                <img
+                    src={prod.image}
+                    alt={prod.title}
+                    className="w-full h-96 object-cover rounded-lg shadow-md"
+                />
+            </div>
+
+            {/* تفاصيل المنتج */}
+            <div className="flex-1 flex flex-col gap-4">
+                <h1 className="text-3xl font-bold">{prod.title}</h1>
+                <p className="text-gray-600">{prod.description}</p>
+                <p className="text-xl font-semibold">Price: ${prod.price}</p>
+                <p>description: {prod.description}</p>
+
+                {/* زر إضافة للسلة */}
+                <button
+                    onClick={() => addToCart(prod)}
+                    className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-40"
+                >
+                    Add to Cart
+                </button>
+
+                {/* زر العودة للمتجر */}
+                <a
+                    href="/shop/products"
+                    className="mt-2 text-blue-500 underline w-40"
+                >
+                    Back to Shop
+                </a>
+            </div>
         </div>
     )
-
 }

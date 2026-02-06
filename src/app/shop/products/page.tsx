@@ -1,12 +1,12 @@
-import { getAllProducts } from "@/features/products/product.service";
-import ProductCard from "@/components/product/ProductCard"
-export default async function ProductsPage() {
-    const products = await getAllProducts()
+"use client"
+import ProductGrid from "@/components/product/productGrid"
+import { products } from "@/fake-db/data/products"
+export default function ProductsPage() {
+    const pgProducts = products
+
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-            ))}
+        <div className="p-6">
+            <ProductGrid products={products} />
         </div>
     )
 }

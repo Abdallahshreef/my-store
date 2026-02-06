@@ -1,6 +1,6 @@
 "use client"
 
-import { useCartStore } from "@/features/cart/cart.store"
+import { useCartStore } from "@/types/features/cart/cart.store"
 export default function CartPage() {
     const items = useCartStore((state) => state.items)
     if (items.lentgh === 0) {

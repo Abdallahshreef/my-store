@@ -7,7 +7,7 @@ export default function Navbar() {
     const toggle = useThemeStore((s) => s.toggle)
 
     return (
-        <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b dark:border-gray-800 shadow-sm">
+        <header className="sticky top-0 z-50 bg-white dark:border-[var(--corder-color)] border-b dark:border-gray-800 shadow-sm">
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                 <Link href="/" className="text-xl font-bold text-blue-600">
                     MyStore
@@ -15,12 +15,21 @@ export default function Navbar() {
 
                 <nav className="flex items-center gap-4">
                     <Link href="/" className="text-gray-600 dark:text-gray-300 hover:text-blue-600">
+                        Home
+                    </Link>
+
+                    <Link href="/shop/products" className="text-gray-600 dark:text-gray-300 hover:text-blue-600">
                         Shop
                     </Link>
 
                     <Link href="/dashboard/products" className="text-gray-600 dark:text-gray-300 hover:text-blue-600">
                         Dashboard
                     </Link>
+
+                    <Link href="/shop/cart" className="text-gray-600 dark:text-gray-300 hover:text-blue-600">
+                        Cart
+                    </Link>
+
 
                     {/* Dark mode toggle */}
                     <button
