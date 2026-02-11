@@ -21,7 +21,7 @@ export default function NewProductForm() {
             {state?.error && <p className="text-red-500">{state.error}</p>}
             {state?.success && <p className="text-green-600">{state.success}</p>}
             <button disabled={pending} className="bg-blue-600 text-white px-4 py-2 rounded">
-                {pending ? "Add product" : "Adding ..."}
+                {pending ? "Adding ..." : "Add product"}
             </button>
         </form>
 

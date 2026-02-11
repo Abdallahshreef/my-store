@@ -1,15 +1,13 @@
 "use client"
-
 import { useRouter } from "next/navigation"
 import { Product } from "@/fake-db/types/product"
-import { useCartStore } from "@/types/features/cart/cart.store"
+import AddToCart from "./addToCart"
 
 interface Props {
     product: Product
 }
 
 export default function ProductCard({ product }: Props) {
-    const addToCart = useCartStore((state) => state.addToCart)
     const router = useRouter()
 
     return (
@@ -29,20 +27,8 @@ export default function ProductCard({ product }: Props) {
             </p>
 
             {/* Button */}
-            < button
-                onClick={(e) => {
-                    e.stopPropagation()   // ✋ يمنع فتح صفحة التفاصيل
-                    addToCart({
-                        id,
-                        title,
-                        price,
-                        image,
-                    })
-                }}
-                className="bg-blue-600 text-white px-3 py-1 rounded"
-            >
-                Add to Cart
-            </button>
+            <AddToCart product={product} />
+
 
         </div>
     )
